@@ -1,1 +1,122 @@
-<h1>Hello World</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ake | Art Portfolio</title>
+    <style>
+        :root {
+            --bg: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --text: #e0e0e0;
+            --accent: #00ffcc; /* Neon Cyan */
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            max-width: 600px;
+        }
+        h1 { font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; text-transform: uppercase; }
+        .bio { color: #888; line-height: 1.6; margin-bottom: 25px; font-size: 1.1rem; }
+        
+        /* Marketplace Links */
+        .links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+        .links a {
+            text-decoration: none;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+        .links a:hover { 
+            background: var(--accent); 
+            color: var(--bg); 
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        /* Art Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            width: 90%;
+            max-width: 1200px;
+            padding-bottom: 100px;
+        }
+        .art-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #222;
+        }
+        
+        /* THE PREMIUM GLOW EFFECT */
+        .art-card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2); 
+        }
+
+        .art-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .art-card:hover img {
+            transform: scale(1.05);
+        }
+        .art-info { padding: 20px; font-size: 0.9rem; border-top: 1px solid #2a2a2a; }
+        .art-info strong { color: var(--accent); display: block; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ake</h1> 
+        <p class="bio">Exploring the intersection of human creativity and AI. Art & Tech pieces created in the latent space.</p>
+        
+        <div class="links">
+            <a href="https://objkt.com/users/tz2HsY37jMmBrY2CzA2fEDp5Nx9QNwPpPaX6" target="_blank">OBJKT</a>
+            <a href="https://foundation.app/@heyake" target="_blank">FOUNDATION</a>
+            <a href="https://kreate.art/@ake" target="_blank">KREATE</a>
+          <a href="https://heyake.art" target="_blank">ART</a>
+        </div>
+    </header>
+
+    <main class="gallery">
+        <div class="art-card">
+            <img src="artwork1.jpg" alt="AI Art Piece 01">
+            <div class="art-info">
+                <strong>GENESIS SERIES #01</strong> 
+                Created with Stable Diffusion & Flux
+            </div>
+        </div>
+
+        <div class="art-card">
+            <img src="artwork2.jpg" alt="AI Art Piece 02">
+            <div class="art-info">
+                <strong>NEURAL DREAMS #02</strong> 
+                Exploring Neural Aesthetics
+            </div>
+        </div>
+        
+        </main>
+
+</body>
+</html>
