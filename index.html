@@ -14,7 +14,6 @@
             --accent: #00ffcc; 
         }
         
-        /* Forces the page to be full height to keep footer at bottom */
         html, body {
             height: 100%;
             margin: 0;
@@ -30,7 +29,6 @@
             align-items: center;
         }
 
-        /* FIX: This makes all links start as Cyan, not Blue */
         a {
             color: var(--accent);
             text-decoration: none;
@@ -51,7 +49,6 @@
         h1 { font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; text-transform: uppercase; }
         .bio { color: #888; line-height: 1.6; margin-bottom: 25px; font-size: 1.1rem; }
         
-        /* Marketplace Buttons */
         .links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
         .links a {
             border: 1px solid var(--accent);
@@ -67,14 +64,13 @@
             text-shadow: none;
         }
 
-        /* Art Grid */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 25px;
             width: 90%;
             max-width: 1200px;
-            flex: 1 0 auto; /* Pushes the footer down */
+            flex: 1 0 auto;
             padding-bottom: 60px;
         }
 
@@ -84,6 +80,7 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid #222;
+            cursor: zoom-in; /* Indicates the image is clickable */
         }
 
         .art-card:hover { 
@@ -102,7 +99,24 @@
         .art-info { padding: 20px; font-size: 0.9rem; border-top: 1px solid #2a2a2a; }
         .art-info strong { color: var(--accent); display: block; margin-bottom: 4px; }
 
-        /* FOOTER FIX */
+        /* LIGHTBOX STYLES */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+        #lightbox img { 
+            max-width: 90%; 
+            max-height: 90%; 
+            border-radius: 8px; 
+            box-shadow: 0 0 50px rgba(0,0,0,0.5); 
+        }
+
         footer {
             flex-shrink: 0;
             width: 100%;
@@ -114,7 +128,7 @@
 
         .social-links { display: flex; justify-content: center; gap: 30px; }
         .social-links a {
-            color: #888; /* Grey footer links */
+            color: #888;
             font-size: 0.9rem;
         }
         .social-links a:hover { color: var(--accent); }
@@ -136,31 +150,40 @@
     </header>
 
     <main class="gallery">
-        <div class="art-card">
+        <div class="art-card" onclick="openLightbox(this)">
             <img src="images/artwork1.webp" alt="AI Art Piece 01">
             <div class="art-info">
                 <strong>#01</strong> 
-                
             </div>
         </div>
 
-        <div class="art-card">
+        <div class="art-card" onclick="openLightbox(this)">
             <img src="images/artwork2.webp" alt="AI Art Piece 02">
             <div class="art-info">
                 <strong>#02</strong> 
-                
             </div>
         </div>
     </main>
+
+    <div id="lightbox" onclick="this.style.display='none'">
+        <img id="lightbox-img" src="">
+    </div>
 
     <footer>
         <div class="social-links">
             <a href="https://twitter.com/bustosjp" target="_blank">Twitter / X</a>
             <a href="https://www.instagram.com/akeaiart/" target="_blank">Instagram</a>
         </div>
-        <p></p>
         <div class="copyright">© 2026 ake • AI Art Exploration</div>
     </footer>
+
+    <script>
+        function openLightbox(element) {
+            const imgSrc = element.querySelector('img').src;
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+    </script>
 
 </body>
 </html>
