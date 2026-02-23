@@ -4,48 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ake | Art Portfolio</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%2300ffcc%22 font-family=%22sans-serif%22 font-weight=%22bold%22>A</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%2300ffcc%22 font-family=%22sans-serif%22 font-weight=%22bold%22>a</text></svg>">
+    
     <style>
         :root {
             --bg: #0f0f0f;
             --card-bg: #1a1a1a;
             --text: #e0e0e0;
-            --accent: #00ffcc; /* Neon Cyan */
+            --accent: #00ffcc; 
         }
+        
+        /* Forces the page to be full height to keep footer at bottom */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             background-color: var(--bg);
             color: var(--text);
             font-family: 'Inter', -apple-system, sans-serif;
-            margin: 0;
-            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
+        /* FIX: This makes all links start as Cyan, not Blue */
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            filter: brightness(1.2);
+            text-shadow: 0 0 8px var(--accent);
+        }
+
         header {
             text-align: center;
             padding: 60px 20px;
             max-width: 600px;
         }
+
         h1 { font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; text-transform: uppercase; }
         .bio { color: #888; line-height: 1.6; margin-bottom: 25px; font-size: 1.1rem; }
         
-        /* Marketplace Links */
+        /* Marketplace Buttons */
         .links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
         .links a {
-            text-decoration: none;
-            color: var(--accent);
             border: 1px solid var(--accent);
             padding: 8px 18px;
             border-radius: 30px;
             font-size: 0.85rem;
             font-weight: 600;
-            transition: 0.3s ease;
         }
         .links a:hover { 
             background: var(--accent); 
             color: var(--bg); 
             box-shadow: 0 0 15px var(--accent);
+            text-shadow: none;
         }
 
         /* Art Grid */
@@ -55,8 +74,10 @@
             gap: 25px;
             width: 90%;
             max-width: 1200px;
-            padding-bottom: 100px;
+            flex: 1 0 auto; /* Pushes the footer down */
+            padding-bottom: 60px;
         }
+
         .art-card {
             background: var(--card-bg);
             border-radius: 16px;
@@ -64,8 +85,7 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid #222;
         }
-        
-        /* THE PREMIUM GLOW EFFECT */
+
         .art-card:hover { 
             transform: translateY(-10px); 
             border-color: var(--accent);
@@ -77,26 +97,41 @@
             height: 350px;
             object-fit: cover;
             display: block;
-            transition: transform 0.5s ease;
         }
-        .art-card:hover img {
-            transform: scale(1.05);
-        }
+
         .art-info { padding: 20px; font-size: 0.9rem; border-top: 1px solid #2a2a2a; }
         .art-info strong { color: var(--accent); display: block; margin-bottom: 4px; }
+
+        /* FOOTER FIX */
+        footer {
+            flex-shrink: 0;
+            width: 100%;
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid #222;
+            background: #0a0a0a;
+        }
+
+        .social-links { display: flex; justify-content: center; gap: 30px; }
+        .social-links a {
+            color: #888; /* Grey footer links */
+            font-size: 0.9rem;
+        }
+        .social-links a:hover { color: var(--accent); }
+        .copyright { margin-top: 20px; font-size: 0.75rem; color: #444; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>ake</h1> 
-        <p class="bio">Exploring the intersection of human creativity and AI. Art & Tech pieces created in the latent space.</p>
+        <p class="bio">Exploring the intersection of human creativity & AI. Art - Tech pieces created in the latent space.</p>
         
         <div class="links">
             <a href="https://objkt.com/users/tz2HsY37jMmBrY2CzA2fEDp5Nx9QNwPpPaX6" target="_blank">OBJKT</a>
             <a href="https://foundation.app/@heyake" target="_blank">FOUNDATION</a>
             <a href="https://kreate.art/@ake" target="_blank">KREATE</a>
-          <a href="https://heyake.art" target="_blank">ART</a>
+            <a href="https://heyake.art" target="_blank">ART</a>
         </div>
     </header>
 
@@ -116,14 +151,16 @@
                 Exploring Neural Aesthetics
             </div>
         </div>
-        
-        </main>
-<footer>
+    </main>
+
+    <footer>
         <div class="social-links">
             <a href="https://twitter.com/bustosjp" target="_blank">Twitter / X</a>
             <a href="https://www.instagram.com/akeaiart/" target="_blank">Instagram</a>
         </div>
-        <div class="copyright">© 2026 AKEMARROPA • AI Art Exploration</div>
+        <p></p>
+        <div class="copyright">© 2026 ake • AI Art Exploration</div>
     </footer>
+
 </body>
 </html>
