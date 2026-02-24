@@ -18,6 +18,7 @@
             height: 100%;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth; /* Smooth scrolling for the button */
         }
 
         body {
@@ -44,6 +45,7 @@
             text-align: center;
             padding: 60px 20px;
             max-width: 600px;
+            animation: fadeIn 1s ease-out;
         }
 
         h1 { font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; text-transform: uppercase; }
@@ -64,14 +66,15 @@
             text-shadow: none;
         }
 
+        /* MASONRY GALLERY SYSTEM */
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
+            column-count: 3;
+            column-gap: 25px;
             width: 90%;
             max-width: 1200px;
             flex: 1 0 auto;
             padding-bottom: 60px;
+            animation: fadeIn 1.5s ease-out;
         }
 
         .art-card {
@@ -80,24 +83,76 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid #222;
-            cursor: zoom-in; /* Indicates the image is clickable */
+            cursor: zoom-in;
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 25px;
+            break-inside: avoid;
         }
 
         .art-card:hover { 
-            transform: translateY(-10px); 
+            transform: translateY(-8px); 
             border-color: var(--accent);
             box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2); 
         }
 
         .art-card img {
             width: 100%;
-            height: 350px;
-            object-fit: cover;
+            height: auto;
             display: block;
         }
 
         .art-info { padding: 20px; font-size: 0.9rem; border-top: 1px solid #2a2a2a; }
         .art-info strong { color: var(--accent); display: block; margin-bottom: 4px; }
+
+        /* MINIMAL BACK TO TOP BUTTON */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #backToTop:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        #backToTop svg {
+            width: 16px;
+            fill: var(--accent);
+            transition: 0.3s;
+        }
+
+        #backToTop:hover svg {
+            fill: var(--bg);
+        }
+
+        /* FADE IN ANIMATION */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 950px) { .gallery { column-count: 2; } }
+        @media (max-width: 600px) { .gallery { column-count: 1; } }
 
         /* LIGHTBOX STYLES */
         #lightbox {
@@ -105,15 +160,15 @@
             position: fixed;
             z-index: 1000;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             justify-content: center;
             align-items: center;
             cursor: zoom-out;
         }
         #lightbox img { 
-            max-width: 90%; 
-            max-height: 90%; 
-            border-radius: 8px; 
+            max-width: 95%; 
+            max-height: 95%; 
+            border-radius: 4px; 
             box-shadow: 0 0 50px rgba(0,0,0,0.5); 
         }
 
@@ -152,47 +207,38 @@
     <main class="gallery">
         <div class="art-card" onclick="openLightbox(this)">
             <img src="images/artwork1.webp" alt="AI Art Piece 01">
-            <div class="art-info">
-                <strong>#01</strong> 
-            </div>
+            <div class="art-info"><strong>#01</strong></div>
         </div>
 
         <div class="art-card" onclick="openLightbox(this)">
             <img src="images/artwork2.webp" alt="AI Art Piece 02">
-            <div class="art-info">
-                <strong>#02</strong> 
-            </div>
+            <div class="art-info"><strong>#02</strong></div>
         </div>
 
         <div class="art-card" onclick="openLightbox(this)">
             <img src="images/artwork3.webp" alt="AI Art Piece 03">
-            <div class="art-info">
-                <strong>#03</strong> 
-            </div>
+            <div class="art-info"><strong>#03</strong></div>
         </div>
 
         <div class="art-card" onclick="openLightbox(this)">
             <img src="images/artwork4.webp" alt="AI Art Piece 04">
-            <div class="art-info">
-                <strong>#04</strong> 
-            </div>
+            <div class="art-info"><strong>#04</strong></div>
         </div>
 
         <div class="art-card" onclick="openLightbox(this)">
             <img src="images/artwork5.webp" alt="AI Art Piece 05">
-            <div class="art-info">
-                <strong>#05</strong> 
-            </div>
+            <div class="art-info"><strong>#05</strong></div>
         </div>
 
         <div class="art-card" onclick="openLightbox(this)">
             <img src="images/artwork6.webp" alt="AI Art Piece 06">
-            <div class="art-info">
-                <strong>#06</strong> 
-            </div>
+            <div class="art-info"><strong>#06</strong></div>
         </div>
-        
     </main>
+
+    <div id="backToTop" onclick="scrollToTop()">
+        <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+    </div>
 
     <div id="lightbox" onclick="this.style.display='none'">
         <img id="lightbox-img" src="">
@@ -203,14 +249,30 @@
             <a href="https://twitter.com/bustosjp" target="_blank">Twitter / X</a>
             <a href="https://www.instagram.com/akeaiart/" target="_blank">Instagram</a>
         </div>
-        <div class="copyright">© 2026 ake • AI Art Exploration</div>
+        <div class="copyright">© 2026 ake • AI Art Works</div>
     </footer>
 
     <script>
+        // Lightbox Logic
         function openLightbox(element) {
             const imgSrc = element.querySelector('img').src;
             document.getElementById('lightbox-img').src = imgSrc;
             document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        // Back to Top Logic
+        const btt = document.getElementById("backToTop");
+        
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btt.classList.add("show");
+            } else {
+                btt.classList.remove("show");
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 
