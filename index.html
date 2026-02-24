@@ -18,7 +18,7 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            scroll-behavior: smooth; /* Smooth scrolling for the button */
+            scroll-behavior: smooth;
         }
 
         body {
@@ -30,21 +30,13 @@
             align-items: center;
         }
 
-        a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        a:hover {
-            filter: brightness(1.2);
-            text-shadow: 0 0 8px var(--accent);
-        }
+        a { color: var(--accent); text-decoration: none; transition: 0.3s; }
+        a:hover { filter: brightness(1.2); text-shadow: 0 0 8px var(--accent); }
 
         header {
             text-align: center;
-            padding: 60px 20px;
-            max-width: 600px;
+            padding: 60px 20px 40px 20px;
+            max-width: 800px;
             animation: fadeIn 1s ease-out;
         }
 
@@ -66,7 +58,37 @@
             text-shadow: none;
         }
 
-        /* MASONRY GALLERY SYSTEM */
+        /* FEATURED EXHIBITION SECTION */
+        .featured-section {
+            width: 90%;
+            max-width: 1200px;
+            margin-bottom: 60px;
+            animation: fadeIn 1.2s ease-out;
+        }
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: block;
+            font-weight: bold;
+        }
+        .featured-card {
+            background: linear-gradient(45deg, #1a1a1a, #0a0a0a);
+            border: 1px solid #333;
+            border-radius: 20px;
+            display: flex;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+        .featured-card:hover { border-color: var(--accent); box-shadow: 0 0 30px rgba(0, 255, 204, 0.1); }
+        .featured-img { width: 50%; height: 400px; object-fit: cover; }
+        .featured-content { padding: 40px; width: 50%; display: flex; flex-direction: column; justify-content: center; }
+        .featured-content h2 { margin: 0 0 10px 0; font-size: 1.8rem; }
+        .featured-content p { color: #999; line-height: 1.6; margin-bottom: 20px; }
+
+        /* MASONRY GALLERY */
         .gallery {
             column-count: 3;
             column-gap: 25px;
@@ -96,96 +118,41 @@
             box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2); 
         }
 
-        .art-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
+        .art-card img { width: 100%; height: auto; display: block; }
         .art-info { padding: 20px; font-size: 0.9rem; border-top: 1px solid #2a2a2a; }
         .art-info strong { color: var(--accent); display: block; margin-bottom: 4px; }
 
-        /* MINIMAL BACK TO TOP BUTTON */
+        /* BACK TO TOP */
         #backToTop {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 40px;
-            height: 40px;
-            background: var(--card-bg);
-            border: 1px solid var(--accent);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 99;
+            position: fixed; bottom: 30px; right: 30px; width: 40px; height: 40px;
+            background: var(--card-bg); border: 1px solid var(--accent); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; cursor: pointer;
+            opacity: 0; visibility: hidden; transition: 0.3s; z-index: 99;
         }
+        #backToTop.show { opacity: 1; visibility: visible; }
+        #backToTop:hover { background: var(--accent); transform: translateY(-5px); }
+        #backToTop svg { width: 16px; fill: var(--accent); transition: 0.3s; }
+        #backToTop:hover svg { fill: var(--bg); }
 
-        #backToTop.show {
-            opacity: 1;
-            visibility: visible;
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 950px) { 
+            .gallery { column-count: 2; }
+            .featured-card { flex-direction: column; }
+            .featured-img, .featured-content { width: 100%; }
+            .featured-img { height: 250px; }
         }
-
-        #backToTop:hover {
-            background: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        #backToTop svg {
-            width: 16px;
-            fill: var(--accent);
-            transition: 0.3s;
-        }
-
-        #backToTop:hover svg {
-            fill: var(--bg);
-        }
-
-        /* FADE IN ANIMATION */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 950px) { .gallery { column-count: 2; } }
         @media (max-width: 600px) { .gallery { column-count: 1; } }
 
-        /* LIGHTBOX STYLES */
         #lightbox {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            justify-content: center;
-            align-items: center;
-            cursor: zoom-out;
+            display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center; cursor: zoom-out;
         }
-        #lightbox img { 
-            max-width: 95%; 
-            max-height: 95%; 
-            border-radius: 4px; 
-            box-shadow: 0 0 50px rgba(0,0,0,0.5); 
-        }
+        #lightbox img { max-width: 95%; max-height: 95%; border-radius: 4px; }
 
-        footer {
-            flex-shrink: 0;
-            width: 100%;
-            text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid #222;
-            background: #0a0a0a;
-        }
-
+        footer { flex-shrink: 0; width: 100%; text-align: center; padding: 40px 0; border-top: 1px solid #222; background: #0a0a0a; }
         .social-links { display: flex; justify-content: center; gap: 30px; }
-        .social-links a {
-            color: #888;
-            font-size: 0.9rem;
-        }
+        .social-links a { color: #888; font-size: 0.9rem; }
         .social-links a:hover { color: var(--accent); }
         .copyright { margin-top: 20px; font-size: 0.75rem; color: #444; }
     </style>
@@ -204,72 +171,45 @@
         </div>
     </header>
 
+    <section class="featured-section">
+        <span class="section-label">Latest Exhibition</span>
+        <div class="featured-card">
+            <img src="images/exhibition.webp" alt="Exhibition Poster" class="featured-img">
+            <div class="featured-content">
+                <h2>Neural Dreams Solo Show</h2>
+                <p>Curated showcase exploring the boundaries of generative aesthetics. Currently showing at the Virtual NFT Gallery.</p>
+                <a href="#" class="links" style="justify-content: flex-start; margin-bottom: 0;">
+                    <a href="https://heyake.art" style="border: 1px solid var(--accent); padding: 8px 20px; border-radius: 30px; font-size: 0.8rem;">View Exhibition</a>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <main class="gallery">
         <div class="art-card" onclick="openLightbox(this)">
             <img src="images/artwork1.webp" alt="AI Art Piece 01">
             <div class="art-info"><strong>#01</strong></div>
         </div>
-
         <div class="art-card" onclick="openLightbox(this)">
             <img src="images/artwork2.webp" alt="AI Art Piece 02">
             <div class="art-info"><strong>#02</strong></div>
         </div>
-
         <div class="art-card" onclick="openLightbox(this)">
             <img src="images/artwork3.webp" alt="AI Art Piece 03">
             <div class="art-info"><strong>#03</strong></div>
         </div>
-
         <div class="art-card" onclick="openLightbox(this)">
             <img src="images/artwork4.webp" alt="AI Art Piece 04">
             <div class="art-info"><strong>#04</strong></div>
         </div>
-
         <div class="art-card" onclick="openLightbox(this)">
             <img src="images/artwork5.webp" alt="AI Art Piece 05">
             <div class="art-info"><strong>#05</strong></div>
         </div>
-
         <div class="art-card" onclick="openLightbox(this)">
             <img src="images/artwork6.webp" alt="AI Art Piece 06">
             <div class="art-info"><strong>#06</strong></div>
         </div>
-
-        <div class="art-card" onclick="openLightbox(this)">
-            <img src="images/artwork7.webp" alt="AI Art Piece 07">
-            <div class="art-info"><strong>#07</strong></div>
-        </div>
-
-        <div class="art-card" onclick="openLightbox(this)">
-            <img src="images/artwork8.webp" alt="AI Art Piece 08">
-            <div class="art-info"><strong>#08</strong></div>
-        </div>
-
-        <div class="art-card" onclick="openLightbox(this)">
-            <img src="images/artwork9.webp" alt="AI Art Piece 09">
-            <div class="art-info"><strong>#09</strong></div>
-        </div>
-
-        <div class="art-card" onclick="openLightbox(this)">
-            <img src="images/artwork10.webp" alt="AI Art Piece 10">
-            <div class="art-info"><strong>#10</strong></div>
-        </div>
-
-        <div class="art-card" onclick="openLightbox(this)">
-            <img src="images/artwork11.webp" alt="AI Art Piece 11">
-            <div class="art-info"><strong>#11</strong></div>
-        </div>
-
-         <div class="art-card" onclick="openLightbox(this)">
-            <img src="images/artwork12.webp" alt="AI Art Piece 12">
-            <div class="art-info"><strong>#12</strong></div>
-        </div>
-
-         <div class="art-card" onclick="openLightbox(this)">
-            <img src="images/artwork13.webp" alt="AI Art Piece 13">
-            <div class="art-info"><strong>#13</strong></div>
-        </div>
-        
     </main>
 
     <div id="backToTop" onclick="scrollToTop()">
@@ -285,32 +225,28 @@
             <a href="https://twitter.com/bustosjp" target="_blank">Twitter / X</a>
             <a href="https://www.instagram.com/akeaiart/" target="_blank">Instagram</a>
         </div>
-        <div class="copyright">© 2026 ake • AI Art Works</div>
+        <div class="copyright">© 2026 ake • AI Art Exploration</div>
     </footer>
 
     <script>
-        // Lightbox Logic
         function openLightbox(element) {
             const imgSrc = element.querySelector('img').src;
             document.getElementById('lightbox-img').src = imgSrc;
             document.getElementById('lightbox').style.display = 'flex';
         }
 
-        // Back to Top Logic
         const btt = document.getElementById("backToTop");
-        
         window.onscroll = function() {
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
                 btt.classList.add("show");
-            } else {
-                btt.classList.remove("show");
-            }
+            } else { btt.classList.remove("show"); }
         };
 
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
     </script>
+
+</body>
+</html>
 
 </body>
 </html>
